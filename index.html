@@ -24,6 +24,8 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
+        outline: 2px solid #46d629;
+        cursor: pointer;
     }
     .nickname {
         font-weight: bold;
@@ -34,13 +36,25 @@
     .like-icon {
         cursor: pointer;
     }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding-top: 50px;
+      border: 2px solid rgba(0,0,0,0.5);
+      text-align: center;
+      display: none;
+    }
   </style>
 </head>
 <body>
   <div class="card">
     <div class="card-header">
       <!-- 프로필 이미지 -->
-      <img class="profile-img" src="https://i.pinimg.com/736x/e4/41/55/e44155c16a4fb7444bc799a86f184a77.jpg" />
+      <img id="profile-img" class="profile-img" src="https://i.pinimg.com/736x/e4/41/55/e44155c16a4fb7444bc799a86f184a77.jpg" />
       <!-- 프로필 닉네임 -->
       <span class="nickname">hyunn._xv</span>
     </div>
@@ -54,36 +68,45 @@
       <span>Like</span>
       
       <!-- 좋아요 개수 -->
-      <span id="count">0</span>
+      <span id="count">629</span>
     </div>
 
     <!-- 내용 -->
     <p class="caption">  ハ____ハ    ｡ﾟﾟ･｡･ﾟﾟ｡<br>꒰   ⬩ ω ⬩  ꒱  ˚｡          ｡˚<br> |   つ ~ Mєσω　ﾟ ･｡･ﾟ</p>
   </div>
 
+  <div id="modal" class="modal">
+    <img 
+    class="modal-img"
+    src="https://mblogthumb-phinf.pstatic.net/20160610_170/jjinzzang80_1465565965414TkIbG_JPEG/attachImage_2679163283.jpeg?type=w800"
+    alt="스토리 이미지" />
+  </div>
+
   <!--JS 코드 -->
   <script>
 
 
-        document.querySelector("#like-icon").addEventListener("click", () => {
-            const likeIcon = document.querySelector("#like-icon")
-            const count = document.querySelector("#count")
-               if(likeIcon.textContent === "♥️") {
-                   likeIcon.textContent = "🤍"
-                   count.textContent = Number(count.textContent) - 1
-               } else {
-                   likeIcon.textContent = "♥️"
-                   count.textContent = Number(count.textContent) + 1
-  }
-            // textContent : 요소의 내용을 변경
+  document.querySelector("#like-icon").addEventListener("click", () => {
+    const likeIcon = document.querySelector("#like-icon")
+    const count = document.querySelector("#count")
+      if(likeIcon.textContent === "♥️") {
+           likeIcon.textContent = "🤍"
+           count.textContent = Number(count.textContent) - 1
+      } else{
+          likeIcon.textContent = "♥️"
+          count.textContent = Number(count.textContent) + 1
+      }
+  })
+        
+  const profileImg = document.querySelector("#profile-img");
+  const modal = document.querySelector("#modal");
 
-            // 1. 하얀색 하트 -> 빨간색 하트(❤)
-            // 하얀색 하트를 선택.textContent = "🤍"
-
-            // 2. 숫자 0 -> 1
-
-
-        })
+  profileImg.addEventListener("click", () => {
+    modal.style.display = "block";
+  })
+  profileImg.addEventListener("click", () => {
+    profileImg.style.display = "none";
+  })
   </script>
 </body>
 </html>
